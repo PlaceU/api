@@ -16,4 +16,11 @@ use yii\rest\ActiveController;
 class MembrosOrganizacaoController extends ActiveController
 {
     public $modelClass = 'app\models\MembrosOrganizacao';
+
+    public function actionMembros($id)
+    {
+        $MembrosOrganizacaoModel = new $this->modelClass;
+        $recs = $MembrosOrganizacaoModel::find(["id_organizacao" => $id])->all();
+        return ['membros' => $recs];
+    }
 }

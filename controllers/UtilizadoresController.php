@@ -16,4 +16,11 @@ use yii\rest\ActiveController;
 class UtilizadoresController extends ActiveController
 {
     public $modelClass = 'app\models\Utilizador';
+
+    public function actionTotal()
+    {
+        $UtilizadorModel = new $this->modelClass;
+        $recs = $UtilizadorModel::find()->all();
+        return ['total' => count($recs)];
+    }
 }

@@ -30,11 +30,11 @@ class MembrosOrganizacao extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_utilizador', 'id_organizao'], 'required'],
-            [['id_utilizador', 'id_organizao', 'moderador'], 'integer'],
-            [['id_utilizador', 'id_organizao'], 'unique', 'targetAttribute' => ['id_utilizador', 'id_organizao']],
+            [['id_utilizador', 'id_organizacao'], 'required'],
+            [['id_utilizador', 'id_organizacao', 'moderador'], 'integer'],
+            [['id_utilizador', 'id_organizacao'], 'unique', 'targetAttribute' => ['id_utilizador', 'id_organizacao']],
             [['id_utilizador'], 'exist', 'skipOnError' => true, 'targetClass' => Utilizador::className(), 'targetAttribute' => ['id_utilizador' => 'id']],
-            [['id_organizao'], 'exist', 'skipOnError' => true, 'targetClass' => Organizacao::className(), 'targetAttribute' => ['id_organizao' => 'id']],
+            [['id_organizacao'], 'exist', 'skipOnError' => true, 'targetClass' => Organizacao::className(), 'targetAttribute' => ['id_organizacao' => 'id']],
         ];
     }
 
@@ -45,7 +45,7 @@ class MembrosOrganizacao extends \yii\db\ActiveRecord
     {
         return [
             'id_utilizador' => 'Id Utilizador',
-            'id_organizao' => 'Id Organizao',
+            'id_organizacao' => 'Id Organizacao',
             'moderador' => 'Moderador',
         ];
     }
@@ -63,6 +63,6 @@ class MembrosOrganizacao extends \yii\db\ActiveRecord
      */
     public function getOrganizao()
     {
-        return $this->hasOne(Organizacao::className(), ['id' => 'id_organizao']);
+        return $this->hasOne(Organizacao::className(), ['id' => 'id_organizacao']);
     }
 }

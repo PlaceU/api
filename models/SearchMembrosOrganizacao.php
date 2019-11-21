@@ -17,7 +17,7 @@ class SearchMembrosOrganizacao extends MembrosOrganizacao
     public function rules()
     {
         return [
-            [['id_utilizador', 'id_organizao', 'moderador'], 'integer'],
+            [['id_utilizador', 'id_organizacao', 'moderador'], 'integer'],
         ];
     }
 
@@ -58,7 +58,7 @@ class SearchMembrosOrganizacao extends MembrosOrganizacao
         // grid filtering conditions
         $query->andFilterWhere([
             'id_utilizador' => $this->id_utilizador,
-            'id_organizao' => $this->id_organizao,
+            'id_organizacao' => $this->id_organizao,
             'moderador' => $this->moderador,
         ]);
 
