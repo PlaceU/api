@@ -39,7 +39,7 @@ class Utilizador extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'password', 'email', 'dta_nascimento', 'dta_registo'], 'required'],
+            [['nome', 'password', 'email', 'dta_nascimento'/*, 'dta_registo'*/], 'required'],
             [['dta_nascimento', 'dta_registo'], 'safe'],
             [['isadmin', 'isbanned'], 'integer'],
             [['nome', 'password', 'email', 'contacto'], 'string', 'max' => 100],

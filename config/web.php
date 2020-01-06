@@ -18,7 +18,6 @@ $config = [
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ]
-
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -53,12 +52,12 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'utilizadores', 'pluralize' => 'false',
-                    'extraPatterns' => ['GET total' => 'total',]],
+                    'extraPatterns' => ['GET total' => 'total', /*'DELETE removerutilizador/{id}' => 'removerutilizador',*/]],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'salas', 'pluralize' => 'false'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'requisicoes', 'pluralize' => 'false'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'organizacao', 'pluralize' => 'false'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'membrosorganizacao', 'pluralize' => 'false',
-                    'extraPatterns' => ['GET {id}/membros' =>'membros',]],
+                    'extraPatterns' => ['GET {id}/membros' => 'membros',]],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'edificios', 'pluralize' => 'false'],
             ],
         ],

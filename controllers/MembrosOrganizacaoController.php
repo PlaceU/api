@@ -19,8 +19,8 @@ class MembrosOrganizacaoController extends ActiveController
 
     public function actionMembros($id)
     {
-        $MembrosOrganizacaoModel = new $this->modelClass;
-        $recs = $MembrosOrganizacaoModel::find(["id_organizacao" => $id])->all();
+        $membrosOrganizacaoModel = new $this->modelClass;
+        $recs = $membrosOrganizacaoModel::find(["id_organizacao" => $id]);
         return ['membros' => $recs];
     }
 }

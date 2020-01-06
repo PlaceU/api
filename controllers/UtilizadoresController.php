@@ -23,4 +23,16 @@ class UtilizadoresController extends ActiveController
         $recs = $UtilizadorModel::find()->all();
         return ['total' => count($recs)];
     }
+
+    /*
+    public function actionRemoverutilizador($id){
+        $UtilizadorModel = new $this->modelClass;
+        $ret=$UtilizadorModel->deleteAll("id=".$id);
+
+        if($ret){
+            \Yii::$app->response->statusCode =200; return ['code'=>'ok'];
+        }
+        \Yii::$app->response->statusCode =404; return ['code'=>'error'];
+    }
+    */
 }

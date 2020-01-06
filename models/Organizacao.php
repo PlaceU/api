@@ -33,6 +33,7 @@ class Organizacao extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    // TODO: alterar GUI
     public function rules()
     {
         return [

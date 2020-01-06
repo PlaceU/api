@@ -61,7 +61,7 @@ class MembrosOrganizacao extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getOrganizao()
+    public function getOrganizacao()
     {
         return $this->hasOne(Organizacao::className(), ['id' => 'id_organizacao']);
     }
