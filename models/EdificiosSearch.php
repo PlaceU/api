@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Organizacao;
+use app\models\Edificios;
 
 /**
- * SearchOrganizacao represents the model behind the search form of `app\models\Organizacao`.
+ * EdificiosSearch represents the model behind the search form of `app\models\Edificios`.
  */
-class SearchOrganizacao extends Organizacao
+class EdificiosSearch extends Edificios
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class SearchOrganizacao extends Organizacao
     public function rules()
     {
         return [
-            [['id', 'id_owner'], 'integer'],
-            [['nome', 'morada', 'mail', 'contacto_fixo', 'contacto_movel', 'dta_registo'], 'safe'],
+            [['id', 'id_organizacao'], 'integer'],
+            [['designacao', 'morada'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class SearchOrganizacao extends Organizacao
      */
     public function search($params)
     {
-        $query = Organizacao::find();
+        $query = Edificios::find();
 
         // add conditions that should always apply here
 
@@ -59,15 +59,11 @@ class SearchOrganizacao extends Organizacao
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'dta_registo' => $this->dta_registo,
-            'id_owner' => $this->id_owner,
+            'id_organizacao' => $this->id_organizacao,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome])
-            ->andFilterWhere(['like', 'morada', $this->morada])
-            ->andFilterWhere(['like', 'mail', $this->mail])
-            ->andFilterWhere(['like', 'contacto_fixo', $this->contacto_fixo])
-            ->andFilterWhere(['like', 'contacto_movel', $this->contacto_movel]);
+        $query->andFilterWhere(['like', 'designacao', $this->designacao])
+            ->andFilterWhere(['like', 'morada', $this->morada]);
 
         return $dataProvider;
     }

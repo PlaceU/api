@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "organizacao".
+ * This is the model class for table "organizacoes".
  *
  * @property int $id
  * @property string $nome
@@ -13,36 +13,35 @@ use Yii;
  * @property string $mail
  * @property string $contacto_fixo
  * @property string $contacto_movel
- * @property string $dta_registo
+ * @property string|null $dta_registo
  * @property int $id_owner
  *
  * @property MembrosOrganizacao[] $membrosOrganizacaos
- * @property Utilizador[] $utilizadors
- * @property Utilizador $owner
+ * @property Utilizadores[] $utilizadors
+ * @property Utilizadores $owner
  */
-class Organizacao extends \yii\db\ActiveRecord
+class Organizacoes extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'organizacao';
+        return 'organizacoes';
     }
 
     /**
      * {@inheritdoc}
      */
-    // TODO: alterar GUI
     public function rules()
     {
         return [
-            [['nome', 'morada', 'mail', 'contacto_fixo', 'contacto_movel', 'dta_registo', 'id_owner'], 'required'],
+            [['nome', 'morada', 'mail', 'contacto_fixo', 'contacto_movel', 'id_owner'], 'required'],
             [['dta_registo'], 'safe'],
             [['id_owner'], 'integer'],
             [['nome', 'contacto_fixo', 'contacto_movel'], 'string', 'max' => 100],
             [['morada', 'mail'], 'string', 'max' => 200],
-            [['id_owner'], 'exist', 'skipOnError' => true, 'targetClass' => Utilizador::className(), 'targetAttribute' => ['id_owner' => 'id']],
+            [['id_owner'], 'exist', 'skipOnError' => true, 'targetClass' => Utilizadores::className(), 'targetAttribute' => ['id_owner' => 'id']],
         ];
     }
 
@@ -68,7 +67,7 @@ class Organizacao extends \yii\db\ActiveRecord
      */
     public function getMembrosOrganizacaos()
     {
-        return $this->hasMany(MembrosOrganizacao::className(), ['id_organizao' => 'id']);
+        return $this->hasMany(MembrosOrganizacao::className(), ['id_organizacao' => 'id']);
     }
 
     /**
@@ -76,7 +75,7 @@ class Organizacao extends \yii\db\ActiveRecord
      */
     public function getUtilizadors()
     {
-        return $this->hasMany(Utilizador::className(), ['id' => 'id_utilizador'])->viaTable('membros_organizacao', ['id_organizao' => 'id']);
+        return $this->hasMany(Utilizadores::className(), ['id' => 'id_utilizador'])->viaTable('membros_organizacao', ['id_organizacao' => 'id']);
     }
 
     /**
@@ -84,6 +83,6 @@ class Organizacao extends \yii\db\ActiveRecord
      */
     public function getOwner()
     {
-        return $this->hasOne(Utilizador::className(), ['id' => 'id_owner']);
+        return $this->hasOne(Utilizadores::className(), ['id' => 'id_owner']);
     }
 }

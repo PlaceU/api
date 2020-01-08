@@ -8,11 +8,11 @@ use Yii;
  * This is the model class for table "membros_organizacao".
  *
  * @property int $id_utilizador
- * @property int $id_organizao
+ * @property int $id_organizacao
  * @property int|null $moderador
  *
- * @property Utilizador $utilizador
- * @property Organizacao $organizao
+ * @property Utilizadores $utilizador
+ * @property Organizacoes $organizacao
  */
 class MembrosOrganizacao extends \yii\db\ActiveRecord
 {
@@ -33,8 +33,8 @@ class MembrosOrganizacao extends \yii\db\ActiveRecord
             [['id_utilizador', 'id_organizacao'], 'required'],
             [['id_utilizador', 'id_organizacao', 'moderador'], 'integer'],
             [['id_utilizador', 'id_organizacao'], 'unique', 'targetAttribute' => ['id_utilizador', 'id_organizacao']],
-            [['id_utilizador'], 'exist', 'skipOnError' => true, 'targetClass' => Utilizador::className(), 'targetAttribute' => ['id_utilizador' => 'id']],
-            [['id_organizacao'], 'exist', 'skipOnError' => true, 'targetClass' => Organizacao::className(), 'targetAttribute' => ['id_organizacao' => 'id']],
+            [['id_utilizador'], 'exist', 'skipOnError' => true, 'targetClass' => Utilizadores::className(), 'targetAttribute' => ['id_utilizador' => 'id']],
+            [['id_organizacao'], 'exist', 'skipOnError' => true, 'targetClass' => Organizacoes::className(), 'targetAttribute' => ['id_organizacao' => 'id']],
         ];
     }
 
@@ -55,7 +55,7 @@ class MembrosOrganizacao extends \yii\db\ActiveRecord
      */
     public function getUtilizador()
     {
-        return $this->hasOne(Utilizador::className(), ['id' => 'id_utilizador']);
+        return $this->hasOne(Utilizadores::className(), ['id' => 'id_utilizador']);
     }
 
     /**
@@ -63,6 +63,6 @@ class MembrosOrganizacao extends \yii\db\ActiveRecord
      */
     public function getOrganizacao()
     {
-        return $this->hasOne(Organizacao::className(), ['id' => 'id_organizacao']);
+        return $this->hasOne(Organizacoes::className(), ['id' => 'id_organizacao']);
     }
 }

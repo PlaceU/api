@@ -14,7 +14,7 @@ use Yii;
  * @property int $id_sala
  *
  * @property Salas $sala
- * @property Utilizador $utilizador
+ * @property Utilizadores $utilizador
  */
 class Requisicoes extends \yii\db\ActiveRecord
 {
@@ -36,7 +36,7 @@ class Requisicoes extends \yii\db\ActiveRecord
             [['dta_inicio', 'dta_fim'], 'safe'],
             [['id_utilizador', 'id_sala'], 'integer'],
             [['id_sala'], 'exist', 'skipOnError' => true, 'targetClass' => Salas::className(), 'targetAttribute' => ['id_sala' => 'id']],
-            [['id_utilizador'], 'exist', 'skipOnError' => true, 'targetClass' => Utilizador::className(), 'targetAttribute' => ['id_utilizador' => 'id']],
+            [['id_utilizador'], 'exist', 'skipOnError' => true, 'targetClass' => Utilizadores::className(), 'targetAttribute' => ['id_utilizador' => 'id']],
         ];
     }
 
@@ -67,6 +67,6 @@ class Requisicoes extends \yii\db\ActiveRecord
      */
     public function getUtilizador()
     {
-        return $this->hasOne(Utilizador::className(), ['id' => 'id_utilizador']);
+        return $this->hasOne(Utilizadores::className(), ['id' => 'id_utilizador']);
     }
 }

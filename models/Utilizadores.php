@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "utilizador".
+ * This is the model class for table "utilizadores".
  *
  * @property int $id
  * @property string $nome
@@ -13,24 +13,24 @@ use Yii;
  * @property string $email
  * @property string|null $morada
  * @property string|null $contacto
- * @property string $dta_nascimento
- * @property string $dta_registo
+ * @property string|null $dta_nascimento
+ * @property string|null $dta_registo
  * @property int|null $isadmin
  * @property int|null $isbanned
  *
  * @property MembrosOrganizacao[] $membrosOrganizacaos
- * @property Organizacao[] $organizaos
- * @property Organizacao[] $organizacaos
+ * @property Organizacoes[] $organizacaos
+ * @property Organizacoes[] $organizacoes
  * @property Requisicoes[] $requisicoes
  */
-class Utilizador extends \yii\db\ActiveRecord
+class Utilizadores extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'utilizador';
+        return 'utilizadores';
     }
 
     /**
@@ -39,7 +39,7 @@ class Utilizador extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'password', 'email', 'dta_nascimento'/*, 'dta_registo'*/], 'required'],
+            [['nome', 'password', 'email'], 'required'],
             [['dta_nascimento', 'dta_registo'], 'safe'],
             [['isadmin', 'isbanned'], 'integer'],
             [['nome', 'password', 'email', 'contacto'], 'string', 'max' => 100],
@@ -78,17 +78,17 @@ class Utilizador extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getOrganizaos()
+    public function getOrganizacaos()
     {
-        return $this->hasMany(Organizacao::className(), ['id' => 'id_organizao'])->viaTable('membros_organizacao', ['id_utilizador' => 'id']);
+        return $this->hasMany(Organizacoes::className(), ['id' => 'id_organizacao'])->viaTable('membros_organizacao', ['id_utilizador' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getOrganizacaos()
+    public function getOrganizacoes()
     {
-        return $this->hasMany(Organizacao::className(), ['id_owner' => 'id']);
+        return $this->hasMany(Organizacoes::className(), ['id_owner' => 'id']);
     }
 
     /**

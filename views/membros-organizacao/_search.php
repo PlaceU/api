@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\SearchMembrosOrganizacao */
+/* @var $model app\models\MembrosOrganizacaoSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id_utilizador') ?>
 
-    <?= $form->field($model, 'id_organizao') ?>
+    <?= $form->field($model, 'id_organizacao') ?>
 
     <?= $form->field($model, 'moderador') ?>
 

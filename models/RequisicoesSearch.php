@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\MembrosOrganizacao;
+use app\models\Requisicoes;
 
 /**
- * SearchMembrosOrganizacao represents the model behind the search form of `app\models\MembrosOrganizacao`.
+ * RequisicoesSearch represents the model behind the search form of `app\models\Requisicoes`.
  */
-class SearchMembrosOrganizacao extends MembrosOrganizacao
+class RequisicoesSearch extends Requisicoes
 {
     /**
      * {@inheritdoc}
@@ -17,7 +17,8 @@ class SearchMembrosOrganizacao extends MembrosOrganizacao
     public function rules()
     {
         return [
-            [['id_utilizador', 'id_organizacao', 'moderador'], 'integer'],
+            [['id', 'id_utilizador', 'id_sala'], 'integer'],
+            [['dta_inicio', 'dta_fim'], 'safe'],
         ];
     }
 
@@ -39,7 +40,7 @@ class SearchMembrosOrganizacao extends MembrosOrganizacao
      */
     public function search($params)
     {
-        $query = MembrosOrganizacao::find();
+        $query = Requisicoes::find();
 
         // add conditions that should always apply here
 
@@ -57,9 +58,11 @@ class SearchMembrosOrganizacao extends MembrosOrganizacao
 
         // grid filtering conditions
         $query->andFilterWhere([
+            'id' => $this->id,
+            'dta_inicio' => $this->dta_inicio,
+            'dta_fim' => $this->dta_fim,
             'id_utilizador' => $this->id_utilizador,
-            'id_organizacao' => $this->id_organizao,
-            'moderador' => $this->moderador,
+            'id_sala' => $this->id_sala,
         ]);
 
         return $dataProvider;

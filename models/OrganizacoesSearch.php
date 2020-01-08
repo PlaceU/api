@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Requisicoes;
+use app\models\Organizacoes;
 
 /**
- * Searchrequisicoes represents the model behind the search form of `app\models\Requisicoes`.
+ * OrganizacoesSearch represents the model behind the search form of `app\models\Organizacoes`.
  */
-class Searchrequisicoes extends Requisicoes
+class OrganizacoesSearch extends Organizacoes
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class Searchrequisicoes extends Requisicoes
     public function rules()
     {
         return [
-            [['id', 'id_utilizador', 'id_sala'], 'integer'],
-            [['dta_inicio', 'dta_fim'], 'safe'],
+            [['id', 'id_owner'], 'integer'],
+            [['nome', 'morada', 'mail', 'contacto_fixo', 'contacto_movel', 'dta_registo'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class Searchrequisicoes extends Requisicoes
      */
     public function search($params)
     {
-        $query = Requisicoes::find();
+        $query = Organizacoes::find();
 
         // add conditions that should always apply here
 
@@ -59,11 +59,15 @@ class Searchrequisicoes extends Requisicoes
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'dta_inicio' => $this->dta_inicio,
-            'dta_fim' => $this->dta_fim,
-            'id_utilizador' => $this->id_utilizador,
-            'id_sala' => $this->id_sala,
+            'dta_registo' => $this->dta_registo,
+            'id_owner' => $this->id_owner,
         ]);
+
+        $query->andFilterWhere(['like', 'nome', $this->nome])
+            ->andFilterWhere(['like', 'morada', $this->morada])
+            ->andFilterWhere(['like', 'mail', $this->mail])
+            ->andFilterWhere(['like', 'contacto_fixo', $this->contacto_fixo])
+            ->andFilterWhere(['like', 'contacto_movel', $this->contacto_movel]);
 
         return $dataProvider;
     }

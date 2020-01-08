@@ -4,11 +4,11 @@ namespace app\controllers;
 
 use Yii;
 use app\models\MembrosOrganizacao;
-use app\models\SearchMembrosOrganizacao;
+use app\models\MembrosOrganizacaoSearch;
+use yii\rest\ActiveController;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\rest\ActiveController;
 
 /**
  * MembrosOrganizacaoController implements the CRUD actions for MembrosOrganizacao model.
@@ -16,11 +16,4 @@ use yii\rest\ActiveController;
 class MembrosOrganizacaoController extends ActiveController
 {
     public $modelClass = 'app\models\MembrosOrganizacao';
-
-    public function actionMembros($id)
-    {
-        $membrosOrganizacaoModel = new $this->modelClass;
-        $recs = $membrosOrganizacaoModel::find(["id_organizacao" => $id]);
-        return ['membros' => $recs];
-    }
 }

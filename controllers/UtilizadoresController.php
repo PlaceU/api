@@ -3,36 +3,33 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Utilizador;
-use app\models\SearchUtilizador;
+use app\models\Utilizadores;
+use app\models\UtilizadoresSearch;
+use yii\rest\ActiveController;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\rest\ActiveController;
 
 /**
- * UtilizadoresController implements the CRUD actions for Utilizador model.
+ * UtilizadoresController implements the CRUD actions for Utilizadores model.
  */
 class UtilizadoresController extends ActiveController
 {
-    public $modelClass = 'app\models\Utilizador';
+    public $modelClass = 'app\models\Utilizadores';
 
     public function actionTotal()
     {
-        $UtilizadorModel = new $this->modelClass;
-        $recs = $UtilizadorModel::find()->all();
+        $UtilizadoresModel = new $this->modelClass;
+        $recs = $UtilizadoresModel::find()->all();
         return ['total' => count($recs)];
     }
 
-    /*
-    public function actionRemoverutilizador($id){
-        $UtilizadorModel = new $this->modelClass;
-        $ret=$UtilizadorModel->deleteAll("id=".$id);
-
-        if($ret){
-            \Yii::$app->response->statusCode =200; return ['code'=>'ok'];
-        }
-        \Yii::$app->response->statusCode =404; return ['code'=>'error'];
+    public function actionEmail($id)
+    {
+        $UtilizadoresModel = new $this->modelClass;
+        $rec = $UtilizadoresModel::find()->where("id=".$id)->one();
+        if($rec)
+            return['id' => $id, 'Email' => $rec->email];
+        return['id' => $id, 'Email' => "null"];
     }
-    */
 }

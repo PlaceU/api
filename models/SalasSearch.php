@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Edificios;
+use app\models\Salas;
 
 /**
- * SearchEdificios represents the model behind the search form of `app\models\Edificios`.
+ * SalasSearch represents the model behind the search form of `app\models\Salas`.
  */
-class SearchEdificios extends Edificios
+class SalasSearch extends Salas
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class SearchEdificios extends Edificios
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['designacao', 'morada'], 'safe'],
+            [['id', 'lugares', 'tem_pc', 'tem_projetor', 'tem_qi', 'tem_wifi', 'id_edificio'], 'integer'],
+            [['designacao'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class SearchEdificios extends Edificios
      */
     public function search($params)
     {
-        $query = Edificios::find();
+        $query = Salas::find();
 
         // add conditions that should always apply here
 
@@ -59,10 +59,15 @@ class SearchEdificios extends Edificios
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'lugares' => $this->lugares,
+            'tem_pc' => $this->tem_pc,
+            'tem_projetor' => $this->tem_projetor,
+            'tem_qi' => $this->tem_qi,
+            'tem_wifi' => $this->tem_wifi,
+            'id_edificio' => $this->id_edificio,
         ]);
 
-        $query->andFilterWhere(['like', 'designacao', $this->designacao])
-            ->andFilterWhere(['like', 'morada', $this->morada]);
+        $query->andFilterWhere(['like', 'designacao', $this->designacao]);
 
         return $dataProvider;
     }

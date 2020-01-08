@@ -14,10 +14,10 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'RlKNJI9Owu7-eglHQHjgnGjLfifk9s6Y',
+            'cookieValidationKey' => 'rXsnB5nGmhHNroM1pJ7-tpLow1v5I0pQ',
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
-            ]
+            ],
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -52,13 +52,16 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'utilizadores', 'pluralize' => 'false',
-                    'extraPatterns' => ['GET total' => 'total', /*'DELETE removerutilizador/{id}' => 'removerutilizador',*/]],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'salas', 'pluralize' => 'false'],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'requisicoes', 'pluralize' => 'false'],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'organizacao', 'pluralize' => 'false'],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'membrosorganizacao', 'pluralize' => 'false',
-                    'extraPatterns' => ['GET {id}/membros' => 'membros',]],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'edificios', 'pluralize' => 'false'],
+                    'extraPatterns' => ['GET total' => 'total', 'GET email/{id}' => 'email']],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'edificios', 'pluralize' => 'false',
+                    'extraPatterns' => ['GET total' => 'total', 'GET designacao/{id}' => 'designacao']],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'membrosorganizacao', 'pluralize' => 'false'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'organizacoes', 'pluralize' => 'false',
+                    'extraPatterns' => ['GET total' => 'total', 'GET nome/{id}' => 'nome']],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'requisicoes', 'pluralize' => 'false',
+                    'extraPatterns' => ['GET total' => 'total', 'GET sala/{id}' => 'sala']],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'salas', 'pluralize' => 'false',
+                    'extraPatterns' => ['GET total' => 'total', 'GET lugares/{id}' => 'lugares']],
             ],
         ],
 

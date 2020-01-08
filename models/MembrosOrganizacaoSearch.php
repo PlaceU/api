@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Salas;
+use app\models\MembrosOrganizacao;
 
 /**
- * SearchSalas represents the model behind the search form of `app\models\Salas`.
+ * MembrosOrganizacaoSearch represents the model behind the search form of `app\models\MembrosOrganizacao`.
  */
-class SearchSalas extends Salas
+class MembrosOrganizacaoSearch extends MembrosOrganizacao
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,7 @@ class SearchSalas extends Salas
     public function rules()
     {
         return [
-            [['id', 'lugares', 'tem_pc', 'tem_projetor', 'tem_qi', 'tem_wifi', 'id_edificio'], 'integer'],
-            [['designacao'], 'safe'],
+            [['id_utilizador', 'id_organizacao', 'moderador'], 'integer'],
         ];
     }
 
@@ -40,7 +39,7 @@ class SearchSalas extends Salas
      */
     public function search($params)
     {
-        $query = Salas::find();
+        $query = MembrosOrganizacao::find();
 
         // add conditions that should always apply here
 
@@ -58,16 +57,10 @@ class SearchSalas extends Salas
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'lugares' => $this->lugares,
-            'tem_pc' => $this->tem_pc,
-            'tem_projetor' => $this->tem_projetor,
-            'tem_qi' => $this->tem_qi,
-            'tem_wifi' => $this->tem_wifi,
-            'id_edificio' => $this->id_edificio,
+            'id_utilizador' => $this->id_utilizador,
+            'id_organizacao' => $this->id_organizacao,
+            'moderador' => $this->moderador,
         ]);
-
-        $query->andFilterWhere(['like', 'designacao', $this->designacao]);
 
         return $dataProvider;
     }
